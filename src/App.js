@@ -136,11 +136,11 @@ export default function WarframeTracker() {
                 <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl shadow-2xl border border-blue-500/20 p-6 md:p-8">
                     <div className="mb-8">
                         <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 mb-2">
-                            Warframe Collection
+                            Warframe Checklist
                         </h1>
-                        <p className="text-slate-400">Acompanhe seu progresso de builds</p>
+                        <p className="text-slate-400">Check your progress</p>
                         <p className="text-xs text-slate-500 mt-1 flex items-center gap-1">
-                            <Save className="w-3 h-3" /> Progresso salvo automaticamente
+                            <Save className="w-3 h-3" /> Autosaved
                         </p>
                     </div>
 
