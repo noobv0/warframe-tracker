@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Check, X, StickyNote, Save } from 'lucide-react';
+import { Check, X, StickyNote, Save, Search } from 'lucide-react';
 
 const INITIAL_WARFRAMES = [
     { name: 'Ash', mastered: false, notes: '' },
@@ -83,6 +83,7 @@ export default function WarframeTracker() {
     const [selectedWarframe, setSelectedWarframe] = useState(null);
     const [sortOrder, setSortOrder] = useState('name-asc');
     const [filter, setFilter] = useState('all');
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         sessionStorage.setItem('warframeProgress', JSON.stringify(warframes));
@@ -104,6 +105,12 @@ export default function WarframeTracker() {
     const sortedAndFiltered = useMemo(() => {
         let filtered = [...warframes];
 
+        if (searchQuery.trim()) {
+            filtered = filtered.filter(w =>
+                w.name.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+        }
+
         if (filter === 'completed') {
             filtered = filtered.filter(w => w.mastered);
         } else if (filter === 'pending') {
@@ -124,7 +131,7 @@ export default function WarframeTracker() {
         });
 
         return filtered;
-    }, [warframes, sortOrder, filter]);
+    }, [warframes, sortOrder, filter, searchQuery]);
 
     const completedCount = warframes.filter(w => w.mastered).length;
     const totalCount = warframes.length;
@@ -146,7 +153,7 @@ export default function WarframeTracker() {
 
                     <div className="mb-6 bg-slate-700/50 rounded-xl p-4">
                         <div className="flex justify-between items-center mb-2">
-                            <span className="text-slate-300 font-medium">Progresso</span>
+                            <span className="text-slate-300 font-medium">Progress</span>
                             <span className="text-cyan-400 font-bold">{completedCount}/{totalCount}</span>
                         </div>
                         <div className="w-full bg-slate-600 rounded-full h-3 overflow-hidden">
@@ -154,6 +161,27 @@ export default function WarframeTracker() {
                                 className="bg-gradient-to-r from-blue-500 to-cyan-400 h-full transition-all duration-500 ease-out"
                                 style={{ width: `${progress}%` }}
                             />
+                        </div>
+                    </div>
+
+                    <div className="mb-6">
+                        <div className="relative">
+                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
+                            <input
+                                type="text"
+                                placeholder="Search Warframe..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="w-full pl-10 pr-4 py-3 bg-slate-700/50 text-slate-200 rounded-xl border border-slate-600 focus:border-blue-500 focus:outline-none placeholder-slate-400"
+                            />
+                            {searchQuery && (
+                                <button
+                                    onClick={() => setSearchQuery('')}
+                                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white transition-colors"
+                                >
+                                    <X className="w-5 h-5" />
+                                </button>
+                            )}
                         </div>
                     </div>
 
@@ -167,7 +195,7 @@ export default function WarframeTracker() {
                                         : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
                                 }`}
                             >
-                                Todos ({totalCount})
+                                All ({totalCount})
                             </button>
                             <button
                                 onClick={() => setFilter('pending')}
@@ -177,7 +205,7 @@ export default function WarframeTracker() {
                                         : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
                                 }`}
                             >
-                                Pendentes ({totalCount - completedCount})
+                                Pending ({totalCount - completedCount})
                             </button>
                             <button
                                 onClick={() => setFilter('completed')}
@@ -187,7 +215,7 @@ export default function WarframeTracker() {
                                         : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
                                 }`}
                             >
-                                Completos ({completedCount})
+                                Completed ({completedCount})
                             </button>
                         </div>
 
@@ -197,10 +225,10 @@ export default function WarframeTracker() {
                                 onChange={(e) => setSortOrder(e.target.value)}
                                 className="px-4 py-2 bg-slate-700 text-slate-300 rounded-lg border border-slate-600 focus:border-blue-500 focus:outline-none font-medium"
                             >
-                                <option value="name-asc">Nome A-Z</option>
-                                <option value="name-desc">Nome Z-A</option>
-                                <option value="status-asc">Pendentes Primeiro</option>
-                                <option value="status-desc">Completos Primeiro</option>
+                                <option value="name-asc">Name A-Z</option>
+                                <option value="name-desc">Name Z-A</option>
+                                <option value="status-asc">Pending First</option>
+                                <option value="status-desc">Completed First</option>
                             </select>
                         </div>
                     </div>
@@ -247,7 +275,7 @@ export default function WarframeTracker() {
                                                     ? 'bg-blue-500/30 text-blue-300 hover:bg-blue-500/50'
                                                     : 'bg-slate-600/50 text-slate-400 hover:bg-slate-600'
                                             }`}
-                                            title="Adicionar nota"
+                                            title="Add note"
                                         >
                                             <StickyNote className="w-4 h-4" />
                                         </button>
@@ -264,13 +292,18 @@ export default function WarframeTracker() {
 
                     {sortedAndFiltered.length === 0 && (
                         <div className="text-center py-12 text-slate-400">
-                            Nenhum warframe encontrado com este filtro.
+                            {searchQuery ? (
+                                <>
+                                    No warframe found with "<span className="text-blue-400 font-semibold">{searchQuery}</span>"
+                                </>
+                            ) : (
+                                'No warframe found with this filter.'
+                            )}
                         </div>
                     )}
                 </div>
             </div>
 
-            {/* Modal de Notas */}
             {selectedWarframe !== null && (
                 <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50">
                     <div className="bg-slate-800 rounded-2xl border-2 border-blue-500/30 p-6 max-w-md w-full shadow-2xl">
@@ -288,7 +321,7 @@ export default function WarframeTracker() {
 
                         <textarea
                             defaultValue={warframes[selectedWarframe].notes}
-                            placeholder="Adicione suas notas aqui... (ex: mods necessários, recursos faltando, etc.)"
+                            placeholder="Add your notes here... (e.g. required mods, missing resources, etc.)"
                             className="w-full h-32 bg-slate-700 text-slate-200 rounded-lg p-3 border border-slate-600 focus:border-blue-500 focus:outline-none resize-none"
                             autoFocus
                         />
@@ -301,13 +334,13 @@ export default function WarframeTracker() {
                                 }}
                                 className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
                             >
-                                Salvar
+                                Save
                             </button>
                             <button
                                 onClick={() => setSelectedWarframe(null)}
                                 className="flex-1 bg-slate-700 hover:bg-slate-600 text-slate-300 font-semibold py-2 px-4 rounded-lg transition-colors"
                             >
-                                Cancelar
+                                Cancel
                             </button>
                         </div>
                     </div>
