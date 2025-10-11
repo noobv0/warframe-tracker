@@ -66,7 +66,6 @@ const INITIAL_WARFRAMES = [
   { name: 'Zephyr', mastered: false, notes: '' }
 ];
 
-// Carregar dados salvos ou usar dados iniciais
 const loadSavedData = () => {
   try {
     const saved = JSON.parse(sessionStorage.getItem('warframeProgress'));
@@ -85,7 +84,6 @@ export default function WarframeTracker() {
   const [sortOrder, setSortOrder] = useState('name-asc');
   const [filter, setFilter] = useState('all');
 
-  // Salvar automaticamente quando os dados mudarem
   useEffect(() => {
     sessionStorage.setItem('warframeProgress', JSON.stringify(warframes));
   }, [warframes]);
