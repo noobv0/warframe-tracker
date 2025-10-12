@@ -73,7 +73,7 @@ const loadSavedData = () => {
             return saved;
         }
     } catch (e) {
-        console.error('Erro ao carregar dados:', e);
+        console.error('Error to load data:', e);
     }
     return INITIAL_WARFRAMES;
 };
