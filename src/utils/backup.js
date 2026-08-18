@@ -11,7 +11,8 @@ function base64ToUtf8(b64) {
     );
 }
 
-export function exportBackup() {
+// Gera o código do backup (não baixa nada sozinho — quem chama decide mostrar/copiar/baixar).
+export function buildBackupCode() {
     const payload = {
         version: 1,
         exportedAt: new Date().toISOString(),
@@ -24,13 +25,15 @@ export function exportBackup() {
             payload[key] = null;
         }
     });
+    return utf8ToBase64(JSON.stringify(payload));
+}
 
-    const code = utf8ToBase64(JSON.stringify(payload));
+export function downloadBackupCode(code) {
     const blob = new Blob([code], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `warframe-tracker-backup-${payload.exportedAt.slice(0, 10)}.txt`;
+    a.download = `warframe-tracker-backup-${new Date().toISOString().slice(0, 10)}.txt`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
