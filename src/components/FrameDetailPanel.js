@@ -2,7 +2,28 @@ import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { X, Check, FileText, Cpu, Shield, Zap } from 'lucide-react';
 
-const PART_ICONS = { bp: FileText, neuroptics: Cpu, chassis: Shield, systems: Zap };
+const PART_ICONS = {
+    bp: FileText, neuroptics: Cpu, chassis: Shield, systems: Zap,
+    'bp-day': FileText, 'neuroptics-day': Cpu, 'chassis-day': Shield, 'systems-day': Zap,
+    'bp-night': FileText, 'neuroptics-night': Cpu, 'chassis-night': Shield, 'systems-night': Zap,
+};
+
+// Agrupa peças pelo campo opcional `group` (ex: Equinox tem "Dia"/"Noite").
+// Sem grupo, tudo cai num grupo único sem cabeçalho.
+function groupParts(parts) {
+    const groups = [];
+    const byName = new Map();
+    parts.forEach(part => {
+        const key = part.group || null;
+        if (!byName.has(key)) {
+            const g = { name: key, parts: [] };
+            byName.set(key, g);
+            groups.push(g);
+        }
+        byName.get(key).parts.push(part);
+    });
+    return groups;
+}
 
 function PartRow({ part, checked, onToggle, sourceLabel }) {
     const Icon = PART_ICONS[part.id] || FileText;
@@ -74,15 +95,26 @@ export default function FrameDetailPanel({ mode, frame, entry, onTogglePart, onN
                             Exclusivo de Founders (programa encerrado em 2013) — indisponível via relíquias.
                         </p>
                     ) : (
-                        <div className="flex flex-col gap-2 mb-5">
-                            {parts.map(part => (
-                                <PartRow
-                                    key={part.id}
-                                    part={part}
-                                    checked={!!checkedMap[part.id]}
-                                    onToggle={() => onTogglePart(part.id)}
-                                    sourceLabel={isPrimeMode ? part.relics.join(', ') : part.source}
-                                />
+                        <div className="flex flex-col gap-4 mb-5">
+                            {groupParts(parts).map(group => (
+                                <div key={group.name || 'default'}>
+                                    {group.name && (
+                                        <p className="text-xs font-semibold uppercase tracking-widest text-mahogany dark:text-strawberry mb-2">
+                                            {group.name}
+                                        </p>
+                                    )}
+                                    <div className="flex flex-col gap-2">
+                                        {group.parts.map(part => (
+                                            <PartRow
+                                                key={part.id}
+                                                part={part}
+                                                checked={!!checkedMap[part.id]}
+                                                onToggle={() => onTogglePart(part.id)}
+                                                sourceLabel={isPrimeMode ? part.relics.join(', ') : part.source}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
                             ))}
                         </div>
                     )}

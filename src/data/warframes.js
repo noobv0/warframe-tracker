@@ -23,9 +23,9 @@ export const WARFRAMES = [
         name: 'Atlas',
         parts: [
             { id: 'bp', name: 'Blueprint', source: 'Missão The Jordas Precept' },
-            { id: 'neuroptics', name: 'Neuroptics', source: 'Jordas Golem (Éris)' },
-            { id: 'chassis', name: 'Chassis', source: 'Jordas Golem (Éris)' },
-            { id: 'systems', name: 'Sistemas', source: 'Jordas Golem (Éris)' },
+            { id: 'neuroptics', name: 'Neuroptics', source: 'Jordas Golem (Assassinato, Éris)' },
+            { id: 'chassis', name: 'Chassis', source: 'Jordas Golem (Assassinato, Éris)' },
+            { id: 'systems', name: 'Sistemas', source: 'Jordas Golem (Assassinato, Éris)' },
         ],
         prime: {
             founderExclusive: false,
@@ -95,9 +95,9 @@ export const WARFRAMES = [
         name: 'Chroma',
         parts: [
             { id: 'bp', name: 'Blueprint', source: 'Missão The New Strange' },
-            { id: 'neuroptics', name: 'Neuroptics', source: 'Junção de Urano' },
-            { id: 'chassis', name: 'Chassis', source: 'Junção de Netuno' },
-            { id: 'systems', name: 'Sistemas', source: 'Junção de Plutão' },
+            { id: 'neuroptics', name: 'Neuroptics', source: 'Junção de Urano (requer 1x Neuroptics do Volt)' },
+            { id: 'chassis', name: 'Chassis', source: 'Junção de Netuno (requer 1x Chassis do Frost)' },
+            { id: 'systems', name: 'Sistemas', source: 'Junção de Plutão (requer 1x Sistemas da Saryn)' },
         ],
         prime: {
             founderExclusive: false,
@@ -153,9 +153,9 @@ export const WARFRAMES = [
         name: 'Ember',
         parts: [
             { id: 'bp', name: 'Blueprint', source: 'Mercado' },
-            { id: 'neuroptics', name: 'Neuroptics', source: 'Sargas Ruk (Saturno)' },
-            { id: 'chassis', name: 'Chassis', source: 'Sargas Ruk (Saturno)' },
-            { id: 'systems', name: 'Sistemas', source: 'Sargas Ruk (Saturno)' },
+            { id: 'neuroptics', name: 'Neuroptics', source: 'Sargas Ruk (Assassinato, Saturno)' },
+            { id: 'chassis', name: 'Chassis', source: 'Sargas Ruk (Assassinato, Saturno)' },
+            { id: 'systems', name: 'Sistemas', source: 'Sargas Ruk (Assassinato, Saturno)' },
         ],
         prime: {
             founderExclusive: false,
@@ -169,11 +169,16 @@ export const WARFRAMES = [
     },
     {
         name: 'Equinox',
+        // Único frame que exige montar 2 aspectos completos (Dia e Noite) antes do Warframe final.
         parts: [
-            { id: 'bp', name: 'Blueprint', source: 'Tyl Regor (Urano)' },
-            { id: 'neuroptics', name: 'Neuroptics', source: 'Tyl Regor (Urano)' },
-            { id: 'chassis', name: 'Chassis', source: 'Tyl Regor (Urano)' },
-            { id: 'systems', name: 'Sistemas', source: 'Tyl Regor (Urano)' },
+            { id: 'bp-day', name: 'Blueprint (Dia)', group: 'Dia', source: 'Tyl Regor (Assassinato, Urano — Rotação A)' },
+            { id: 'neuroptics-day', name: 'Neuroptics (Dia)', group: 'Dia', source: 'Tyl Regor (Assassinato, Urano — Rotação A)' },
+            { id: 'chassis-day', name: 'Chassis (Dia)', group: 'Dia', source: 'Tyl Regor (Assassinato, Urano — Rotação A)' },
+            { id: 'systems-day', name: 'Sistemas (Dia)', group: 'Dia', source: 'Tyl Regor (Assassinato, Urano — Rotação A)' },
+            { id: 'bp-night', name: 'Blueprint (Noite)', group: 'Noite', source: 'Tyl Regor (Assassinato, Urano — Rotação B)' },
+            { id: 'neuroptics-night', name: 'Neuroptics (Noite)', group: 'Noite', source: 'Tyl Regor (Assassinato, Urano — Rotação B)' },
+            { id: 'chassis-night', name: 'Chassis (Noite)', group: 'Noite', source: 'Tyl Regor (Assassinato, Urano — Rotação B)' },
+            { id: 'systems-night', name: 'Sistemas (Noite)', group: 'Noite', source: 'Tyl Regor (Assassinato, Urano — Rotação B)' },
         ],
         prime: {
             founderExclusive: false,
@@ -189,9 +194,9 @@ export const WARFRAMES = [
         name: 'Excalibur',
         parts: [
             { id: 'bp', name: 'Blueprint', source: 'Mercado' },
-            { id: 'neuroptics', name: 'Neuroptics', source: 'Lech Kril (Marte)' },
-            { id: 'chassis', name: 'Chassis', source: 'Lech Kril (Marte)' },
-            { id: 'systems', name: 'Sistemas', source: 'Lech Kril (Marte)' },
+            { id: 'neuroptics', name: 'Neuroptics', source: 'Lech Kril (Assassinato, Marte)' },
+            { id: 'chassis', name: 'Chassis', source: 'Lech Kril (Assassinato, Marte)' },
+            { id: 'systems', name: 'Sistemas', source: 'Lech Kril (Assassinato, Marte)' },
         ],
         prime: {
             founderExclusive: true,
@@ -212,9 +217,9 @@ export const WARFRAMES = [
         name: 'Frost',
         parts: [
             { id: 'bp', name: 'Blueprint', source: 'Mercado' },
-            { id: 'neuroptics', name: 'Neuroptics', source: 'Vor e Lech Kril (Ceres)' },
-            { id: 'chassis', name: 'Chassis', source: 'Vor e Lech Kril (Ceres)' },
-            { id: 'systems', name: 'Sistemas', source: 'Vor e Lech Kril (Ceres)' },
+            { id: 'neuroptics', name: 'Neuroptics', source: 'Vor e Lech Kril (Assassinato, Ceres)' },
+            { id: 'chassis', name: 'Chassis', source: 'Vor e Lech Kril (Assassinato, Ceres)' },
+            { id: 'systems', name: 'Sistemas', source: 'Vor e Lech Kril (Assassinato, Ceres)' },
         ],
         prime: {
             founderExclusive: false,
@@ -284,9 +289,9 @@ export const WARFRAMES = [
         name: 'Grendel',
         parts: [
             { id: 'bp', name: 'Blueprint', source: 'Mercado' },
-            { id: 'neuroptics', name: 'Neuroptics', source: 'Missão Europa (Locator - Arbitration Honors)' },
-            { id: 'chassis', name: 'Chassis', source: 'Missão Europa (Locator - Arbitration Honors)' },
-            { id: 'systems', name: 'Sistemas', source: 'Missão Europa (Locator - Arbitration Honors)' },
+            { id: 'neuroptics', name: 'Neuroptics', source: 'Archaeo-freighter (Sobrevivência, Europa — Locator de Arbitration Honors)' },
+            { id: 'chassis', name: 'Chassis', source: 'Icefields of Riddah (Defesa, Europa — Locator de Arbitration Honors)' },
+            { id: 'systems', name: 'Sistemas', source: 'Mines of Karishh (Escavação, Europa — Locator de Arbitration Honors)' },
         ],
         prime: {
             founderExclusive: false,
@@ -356,9 +361,9 @@ export const WARFRAMES = [
         name: 'Hydroid',
         parts: [
             { id: 'bp', name: 'Blueprint', source: 'Mercado' },
-            { id: 'neuroptics', name: 'Neuroptics', source: 'Vay Hek (Terra)' },
-            { id: 'chassis', name: 'Chassis', source: 'Vay Hek (Terra)' },
-            { id: 'systems', name: 'Sistemas', source: 'Vay Hek (Terra)' },
+            { id: 'neuroptics', name: 'Neuroptics', source: 'Vay Hek (Assassinato, Terra)' },
+            { id: 'chassis', name: 'Chassis', source: 'Vay Hek (Assassinato, Terra)' },
+            { id: 'systems', name: 'Sistemas', source: 'Vay Hek (Assassinato, Terra)' },
         ],
         prime: {
             founderExclusive: false,
@@ -494,9 +499,9 @@ export const WARFRAMES = [
         name: 'Loki',
         parts: [
             { id: 'bp', name: 'Blueprint', source: 'Mercado' },
-            { id: 'neuroptics', name: 'Neuroptics', source: 'Hyena Pack (Psamathe, Netuno)' },
-            { id: 'chassis', name: 'Chassis', source: 'Hyena Pack (Psamathe, Netuno)' },
-            { id: 'systems', name: 'Sistemas', source: 'Hyena Pack (Psamathe, Netuno)' },
+            { id: 'neuroptics', name: 'Neuroptics', source: 'Hyena Pack (Assassinato, Psamathe, Netuno)' },
+            { id: 'chassis', name: 'Chassis', source: 'Hyena Pack (Assassinato, Psamathe, Netuno)' },
+            { id: 'systems', name: 'Sistemas', source: 'Hyena Pack (Assassinato, Psamathe, Netuno)' },
         ],
         prime: {
             founderExclusive: false,
@@ -512,9 +517,9 @@ export const WARFRAMES = [
         name: 'Mag',
         parts: [
             { id: 'bp', name: 'Blueprint', source: 'Mercado' },
-            { id: 'neuroptics', name: 'Neuroptics', source: 'The Sergeant (Iliad, Phobos)' },
-            { id: 'chassis', name: 'Chassis', source: 'The Sergeant (Iliad, Phobos)' },
-            { id: 'systems', name: 'Sistemas', source: 'The Sergeant (Iliad, Phobos)' },
+            { id: 'neuroptics', name: 'Neuroptics', source: 'The Sergeant (Assassinato, Iliad, Phobos)' },
+            { id: 'chassis', name: 'Chassis', source: 'The Sergeant (Assassinato, Iliad, Phobos)' },
+            { id: 'systems', name: 'Sistemas', source: 'The Sergeant (Assassinato, Iliad, Phobos)' },
         ],
         prime: {
             founderExclusive: false,
@@ -530,9 +535,9 @@ export const WARFRAMES = [
         name: 'Mesa',
         parts: [
             { id: 'bp', name: 'Blueprint', source: 'Mercado' },
-            { id: 'neuroptics', name: 'Neuroptics', source: 'Mutalist Alad V (Eris)' },
-            { id: 'chassis', name: 'Chassis', source: 'Mutalist Alad V (Eris)' },
-            { id: 'systems', name: 'Sistemas', source: 'Mutalist Alad V (Eris)' },
+            { id: 'neuroptics', name: 'Neuroptics', source: 'Mutalist Alad V (Assassinato, Eris)' },
+            { id: 'chassis', name: 'Chassis', source: 'Mutalist Alad V (Assassinato, Eris)' },
+            { id: 'systems', name: 'Sistemas', source: 'Mutalist Alad V (Assassinato, Eris)' },
         ],
         prime: {
             founderExclusive: false,
@@ -566,9 +571,9 @@ export const WARFRAMES = [
         name: 'Nekros',
         parts: [
             { id: 'bp', name: 'Blueprint', source: 'Mercado' },
-            { id: 'neuroptics', name: 'Neuroptics', source: 'Lephantis (Deimos)' },
-            { id: 'chassis', name: 'Chassis', source: 'Lephantis (Deimos)' },
-            { id: 'systems', name: 'Sistemas', source: 'Lephantis (Deimos)' },
+            { id: 'neuroptics', name: 'Neuroptics', source: 'Lephantis (Assassinato, Deimos)' },
+            { id: 'chassis', name: 'Chassis', source: 'Lephantis (Assassinato, Deimos)' },
+            { id: 'systems', name: 'Sistemas', source: 'Lephantis (Assassinato, Deimos)' },
         ],
         prime: {
             founderExclusive: false,
@@ -630,9 +635,9 @@ export const WARFRAMES = [
         name: 'Nova',
         parts: [
             { id: 'bp', name: 'Blueprint', source: 'Mercado' },
-            { id: 'neuroptics', name: 'Neuroptics', source: 'Raptor (Europa)' },
-            { id: 'chassis', name: 'Chassis', source: 'Raptor (Europa)' },
-            { id: 'systems', name: 'Sistemas', source: 'Raptor (Europa)' },
+            { id: 'neuroptics', name: 'Neuroptics', source: 'Raptor (Assassinato, Europa)' },
+            { id: 'chassis', name: 'Chassis', source: 'Raptor (Assassinato, Europa)' },
+            { id: 'systems', name: 'Sistemas', source: 'Raptor (Assassinato, Europa)' },
         ],
         prime: {
             founderExclusive: false,
@@ -648,9 +653,9 @@ export const WARFRAMES = [
         name: 'Nyx',
         parts: [
             { id: 'bp', name: 'Blueprint', source: 'Mercado' },
-            { id: 'neuroptics', name: 'Neuroptics', source: 'Phorid (Invasão Infestada)' },
-            { id: 'chassis', name: 'Chassis', source: 'Phorid (Invasão Infestada)' },
-            { id: 'systems', name: 'Sistemas', source: 'Phorid (Invasão Infestada)' },
+            { id: 'neuroptics', name: 'Neuroptics', source: 'Phorid (Assassinato, Invasão Infestada)' },
+            { id: 'chassis', name: 'Chassis', source: 'Phorid (Assassinato, Invasão Infestada)' },
+            { id: 'systems', name: 'Sistemas', source: 'Phorid (Assassinato, Invasão Infestada)' },
         ],
         prime: {
             founderExclusive: false,
@@ -758,9 +763,9 @@ export const WARFRAMES = [
         name: 'Rhino',
         parts: [
             { id: 'bp', name: 'Blueprint', source: 'Mercado' },
-            { id: 'neuroptics', name: 'Neuroptics', source: 'Jackal (Fossa, Vênus)' },
-            { id: 'chassis', name: 'Chassis', source: 'Jackal (Fossa, Vênus)' },
-            { id: 'systems', name: 'Sistemas', source: 'Jackal (Fossa, Vênus)' },
+            { id: 'neuroptics', name: 'Neuroptics', source: 'Jackal (Assassinato, Fossa, Vênus)' },
+            { id: 'chassis', name: 'Chassis', source: 'Jackal (Assassinato, Fossa, Vênus)' },
+            { id: 'systems', name: 'Sistemas', source: 'Jackal (Assassinato, Fossa, Vênus)' },
         ],
         prime: {
             founderExclusive: false,
@@ -776,9 +781,9 @@ export const WARFRAMES = [
         name: 'Saryn',
         parts: [
             { id: 'bp', name: 'Blueprint', source: 'Mercado' },
-            { id: 'neuroptics', name: 'Neuroptics', source: 'Kela De Thaym (Merrow, Sedna)' },
-            { id: 'chassis', name: 'Chassis', source: 'Kela De Thaym (Merrow, Sedna)' },
-            { id: 'systems', name: 'Sistemas', source: 'Kela De Thaym (Merrow, Sedna)' },
+            { id: 'neuroptics', name: 'Neuroptics', source: 'Kela De Thaym (Assassinato, Merrow, Sedna)' },
+            { id: 'chassis', name: 'Chassis', source: 'Kela De Thaym (Assassinato, Merrow, Sedna)' },
+            { id: 'systems', name: 'Sistemas', source: 'Kela De Thaym (Assassinato, Merrow, Sedna)' },
         ],
         prime: {
             founderExclusive: false,
@@ -868,9 +873,9 @@ export const WARFRAMES = [
         name: 'Trinity',
         parts: [
             { id: 'bp', name: 'Blueprint', source: 'Mercado' },
-            { id: 'neuroptics', name: 'Neuroptics', source: 'Ambulas (Hades, Plutão)' },
-            { id: 'chassis', name: 'Chassis', source: 'Ambulas (Hades, Plutão)' },
-            { id: 'systems', name: 'Sistemas', source: 'Ambulas (Hades, Plutão)' },
+            { id: 'neuroptics', name: 'Neuroptics', source: 'Ambulas (Assassinato, Hades, Plutão)' },
+            { id: 'chassis', name: 'Chassis', source: 'Ambulas (Assassinato, Hades, Plutão)' },
+            { id: 'systems', name: 'Sistemas', source: 'Ambulas (Assassinato, Hades, Plutão)' },
         ],
         prime: {
             founderExclusive: false,
@@ -886,9 +891,9 @@ export const WARFRAMES = [
         name: 'Uriel',
         parts: [
             { id: 'bp', name: 'Blueprint', source: 'Missão The Old Peace' },
-            { id: 'neuroptics', name: 'Neuroptics', source: "Roathe's Oblivion (Infernium 21, The Descendia)" },
-            { id: 'chassis', name: 'Chassis', source: "Roathe's Oblivion (Infernium 21, The Descendia)" },
-            { id: 'systems', name: 'Sistemas', source: "Roathe's Oblivion (Infernium 21, The Descendia)" },
+            { id: 'neuroptics', name: 'Neuroptics', source: "Roathe's Oblivion (Assassinato, Infernium 21, The Descendia)" },
+            { id: 'chassis', name: 'Chassis', source: "Roathe's Oblivion (Assassinato, Infernium 21, The Descendia)" },
+            { id: 'systems', name: 'Sistemas', source: "Roathe's Oblivion (Assassinato, Infernium 21, The Descendia)" },
         ],
         prime: null,
     },
@@ -896,9 +901,9 @@ export const WARFRAMES = [
         name: 'Valkyr',
         parts: [
             { id: 'bp', name: 'Blueprint', source: 'Mercado' },
-            { id: 'neuroptics', name: 'Neuroptics', source: 'Alad V (Júpiter)' },
-            { id: 'chassis', name: 'Chassis', source: 'Alad V (Júpiter)' },
-            { id: 'systems', name: 'Sistemas', source: 'Alad V (Júpiter)' },
+            { id: 'neuroptics', name: 'Neuroptics', source: 'Alad V (Assassinato, Júpiter)' },
+            { id: 'chassis', name: 'Chassis', source: 'Alad V (Assassinato, Júpiter)' },
+            { id: 'systems', name: 'Sistemas', source: 'Alad V (Assassinato, Júpiter)' },
         ],
         prime: {
             founderExclusive: false,
@@ -967,10 +972,10 @@ export const WARFRAMES = [
     {
         name: 'Wisp',
         parts: [
-            { id: 'bp', name: 'Blueprint', source: 'Ropalolyst (Júpiter)' },
-            { id: 'neuroptics', name: 'Neuroptics', source: 'Ropalolyst (Júpiter)' },
-            { id: 'chassis', name: 'Chassis', source: 'Ropalolyst (Júpiter)' },
-            { id: 'systems', name: 'Sistemas', source: 'Ropalolyst (Júpiter)' },
+            { id: 'bp', name: 'Blueprint', source: 'Ropalolyst (Assassinato, Júpiter)' },
+            { id: 'neuroptics', name: 'Neuroptics', source: 'Ropalolyst (Assassinato, Júpiter)' },
+            { id: 'chassis', name: 'Chassis', source: 'Ropalolyst (Assassinato, Júpiter)' },
+            { id: 'systems', name: 'Sistemas', source: 'Ropalolyst (Assassinato, Júpiter)' },
         ],
         prime: {
             founderExclusive: false,

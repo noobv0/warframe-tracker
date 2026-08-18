@@ -80,11 +80,21 @@ export function useWarframeProgress() {
         }));
     };
 
+    // Marca (ou desmarca, se já estiver tudo marcado) todas as peças de uma vez — botão direito no card.
+    const setAllParts = (frameName, section) => {
+        setProgress(prev => {
+            const current = prev[frameName][section];
+            const allDone = Object.values(current).every(Boolean);
+            const updated = Object.fromEntries(Object.keys(current).map(id => [id, !allDone]));
+            return { ...prev, [frameName]: { ...prev[frameName], [section]: updated } };
+        });
+    };
+
     const setNotes = (frameName, notes) => {
         setProgress(prev => ({ ...prev, [frameName]: { ...prev[frameName], notes } }));
     };
 
-    return { progress, togglePart, setNotes };
+    return { progress, togglePart, setAllParts, setNotes };
 }
 
 export function isBaseComplete(entry) {

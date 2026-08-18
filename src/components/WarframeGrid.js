@@ -19,8 +19,19 @@ function isEntryComplete(entry, progressEntry) {
     return isPrimeComplete(progressEntry);
 }
 
+// 0 = completo, 1 = quase completo (peças parciais), 2 = zerado.
+function progressBucket(entry, progressEntry) {
+    if (entry.kind === 'prime' && entry.frame.prime.founderExclusive) return 2;
+    const map = entry.kind === 'base' ? progressEntry.baseParts : progressEntry.primeParts;
+    const values = Object.values(map);
+    const done = values.filter(Boolean).length;
+    if (done === values.length) return 0;
+    if (done === 0) return 2;
+    return 1;
+}
+
 export default function WarframeGrid() {
-    const { progress, togglePart, setNotes } = useWarframeProgress();
+    const { progress, togglePart, setAllParts, setNotes } = useWarframeProgress();
     const [selected, setSelected] = useState(null);
     const [sortOrder, setSortOrder] = useState('name-asc');
     const [filter, setFilter] = useState('all');
@@ -49,6 +60,10 @@ export default function WarframeGrid() {
                 if (sortOrder === 'status-asc') return aDone ? 1 : -1;
                 return aDone ? -1 : 1;
             });
+        } else if (sortOrder === 'progress') {
+            entries = [...entries].sort((a, b) =>
+                progressBucket(a, progress[a.frame.name]) - progressBucket(b, progress[b.frame.name])
+            );
         }
 
         return entries;
@@ -133,6 +148,7 @@ export default function WarframeGrid() {
                         <option value="name-desc">Nome Z-A</option>
                         <option value="status-asc">Pendentes primeiro</option>
                         <option value="status-desc">Completos primeiro</option>
+                        <option value="progress">Completos → Quase → Zerados</option>
                     </select>
                 </div>
             </div>
@@ -157,6 +173,7 @@ export default function WarframeGrid() {
                             complete={isEntryComplete(entry, progressEntry)}
                             note={founderExclusive ? 'Exclusivo de Founders — indisponível' : progressEntry.notes}
                             onClick={() => setSelected({ kind: entry.kind, name: entry.frame.name })}
+                            onFullMark={founderExclusive ? undefined : () => setAllParts(entry.frame.name, isPrimeEntry ? 'primeParts' : 'baseParts')}
                         />
                     );
                 })}

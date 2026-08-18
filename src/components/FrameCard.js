@@ -1,9 +1,11 @@
 import React from 'react';
 
-export default function FrameCard({ name, done, total, complete, note, onClick }) {
+export default function FrameCard({ name, done, total, complete, note, onClick, onFullMark }) {
     return (
         <button
             onClick={onClick}
+            onContextMenu={onFullMark && ((e) => { e.preventDefault(); onFullMark(); })}
+            title={onFullMark ? 'Clique direito pra marcar/desmarcar tudo' : undefined}
             className={`group text-left rounded-2xl p-4 border transition-all duration-150 hover:-translate-y-0.5 ${
                 complete
                     ? 'bg-green-500/10 border-green-500/40 hover:shadow-lg hover:shadow-green-500/10'

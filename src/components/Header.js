@@ -1,5 +1,6 @@
 import React from 'react';
 import { Save, Sun, Moon } from 'lucide-react';
+import BackupControls from './BackupControls';
 
 const TABS = [
     { id: 'warframes', label: 'Warframes' },
@@ -20,13 +21,16 @@ export default function Header({ activeTab, onTabChange, theme, onToggleTheme })
                     </p>
                 </div>
 
-                <button
-                    onClick={onToggleTheme}
-                    title={theme === 'dark' ? 'Mudar para tema claro' : 'Mudar para tema escuro'}
-                    className="p-3 rounded-xl bg-smoke dark:bg-black/40 text-carbon hover:bg-dustgrey/60 dark:text-smoke dark:hover:bg-black/70 transition-colors shrink-0 border border-dustgrey/60 dark:border-white/5"
-                >
-                    {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-                </button>
+                <div className="flex gap-2 shrink-0">
+                    <BackupControls />
+                    <button
+                        onClick={onToggleTheme}
+                        title={theme === 'dark' ? 'Mudar para tema claro' : 'Mudar para tema escuro'}
+                        className="p-3 rounded-xl bg-smoke dark:bg-black/40 text-carbon hover:bg-dustgrey/60 dark:text-smoke dark:hover:bg-black/70 transition-colors shrink-0 border border-dustgrey/60 dark:border-white/5"
+                    >
+                        {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                    </button>
+                </div>
             </div>
 
             <div className="flex gap-6 border-b border-dustgrey/60 dark:border-white/10">
