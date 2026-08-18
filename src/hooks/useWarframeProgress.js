@@ -35,6 +35,19 @@ function migrateLegacyArray(oldArray) {
     return map;
 }
 
+// Só aproveita, do progresso salvo, as chaves que ainda existem na estrutura atual
+// de peças — evita que ids antigos (de quando um frame tinha menos/outras peças,
+// como a Equinox foi de 4 pra 8) fiquem "presos" pra sempre e impeçam 100%.
+function mergeParts(defaultParts, savedParts) {
+    if (!defaultParts) return null;
+    if (!savedParts || typeof savedParts !== 'object') return defaultParts;
+    const merged = {};
+    Object.keys(defaultParts).forEach(id => {
+        merged[id] = id in savedParts ? !!savedParts[id] : defaultParts[id];
+    });
+    return merged;
+}
+
 function loadProgress() {
     let raw;
     try {
@@ -54,8 +67,8 @@ function loadProgress() {
             const saved = raw[name];
             if (!saved) return;
             defaults[name] = {
-                baseParts: defaults[name].baseParts && { ...defaults[name].baseParts, ...saved.baseParts },
-                primeParts: defaults[name].primeParts && { ...defaults[name].primeParts, ...saved.primeParts },
+                baseParts: mergeParts(defaults[name].baseParts, saved.baseParts),
+                primeParts: mergeParts(defaults[name].primeParts, saved.primeParts),
                 notes: saved.notes || '',
             };
         });
