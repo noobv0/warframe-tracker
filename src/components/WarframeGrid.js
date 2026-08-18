@@ -19,21 +19,19 @@ function isEntryComplete(entry, progressEntry) {
     return isPrimeComplete(progressEntry);
 }
 
-// 0 = completo, 1 = quase completo (peças parciais), 2 = zerado.
-function progressBucket(entry, progressEntry) {
-    if (entry.kind === 'prime' && entry.frame.prime.founderExclusive) return 2;
+// Proporção de peças obtidas (0 a 1) — usa proporção, não contagem crua, pra
+// não misturar frames com números de peças diferentes (Equinox tem 8, os outros 4).
+function progressRatio(entry, progressEntry) {
+    if (entry.kind === 'prime' && entry.frame.prime.founderExclusive) return 0;
     const map = entry.kind === 'base' ? progressEntry.baseParts : progressEntry.primeParts;
     const values = Object.values(map);
-    const done = values.filter(Boolean).length;
-    if (done === values.length) return 0;
-    if (done === 0) return 2;
-    return 1;
+    return values.length ? values.filter(Boolean).length / values.length : 0;
 }
 
 export default function WarframeGrid() {
     const { progress, togglePart, setAllParts, setNotes } = useWarframeProgress();
     const [selected, setSelected] = useState(null);
-    const [sortOrder, setSortOrder] = useState('name-asc');
+    const [sortOrder, setSortOrder] = useState('progress');
     const [filter, setFilter] = useState('all');
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -62,7 +60,7 @@ export default function WarframeGrid() {
             });
         } else if (sortOrder === 'progress') {
             entries = [...entries].sort((a, b) =>
-                progressBucket(a, progress[a.frame.name]) - progressBucket(b, progress[b.frame.name])
+                progressRatio(b, progress[b.frame.name]) - progressRatio(a, progress[a.frame.name])
             );
         }
 
@@ -148,7 +146,7 @@ export default function WarframeGrid() {
                         <option value="name-desc">Nome Z-A</option>
                         <option value="status-asc">Pendentes primeiro</option>
                         <option value="status-desc">Completos primeiro</option>
-                        <option value="progress">Completos → Quase → Zerados</option>
+                        <option value="progress">Progresso (completos primeiro)</option>
                     </select>
                 </div>
             </div>

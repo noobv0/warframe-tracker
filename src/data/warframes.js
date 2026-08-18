@@ -94,8 +94,8 @@ export const WARFRAMES = [
     {
         name: 'Chroma',
         parts: [
-            { id: 'bp', name: 'Blueprint', source: 'Missão The New Strange' },
-            { id: 'neuroptics', name: 'Neuroptics', source: 'Junção de Urano (requer 1x Neuroptics do Volt)' },
+            { id: 'bp', name: 'Blueprint', source: 'Missão The New Strange (requer 1x Neuroptics do Volt)' },
+            { id: 'neuroptics', name: 'Neuroptics', source: 'Junção de Urano (requer 1x Neuroptics da Ember)' },
             { id: 'chassis', name: 'Chassis', source: 'Junção de Netuno (requer 1x Chassis do Frost)' },
             { id: 'systems', name: 'Sistemas', source: 'Junção de Plutão (requer 1x Sistemas da Saryn)' },
         ],
