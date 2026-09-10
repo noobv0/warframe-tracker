@@ -8,7 +8,9 @@ import ModCard from './ModCard';
 // build = { aura, stance, exilus, mods:[], arcanes:[], forma, obs }
 export default function BuildView({ build }) {
     const db = useModDb();
-    if (!build) return null;
+    const hasContent =
+        build && (build.aura || build.stance || build.exilus || (build.mods && build.mods.length > 0));
+    if (!hasContent) return null;
 
     const special = build.aura
         ? { label: 'Aura', name: build.aura }

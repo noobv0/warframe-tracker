@@ -1,18 +1,20 @@
-// Coleção de builds — estilo Overframe. Conteúdo AUTORAL, só leitura:
-// os amigos abrem a aba, escolhem a categoria e clicam numa build pra ver os mods.
-// Pra adicionar/editar, mexe só neste arquivo.
+// Coleção de builds — estilo Overframe. Conteúdo em maior parte AUTORAL, só leitura.
+// As builds importadas de guias de terceiros trazem `source` (link) e `credit`.
 //
 // Cada build:
-//   id       : identificador único (kebab-case)
-//   category : 'warframe' | 'primary' | 'secondary' | 'melee' | 'archwing' | 'companion'
-//   subject  : nome exato do frame/arma (usado no thumbnail e no subtítulo)
-//   title    : título da build (aparece na lista)
-//   purpose  : (opcional) pra que serve, em uma linha
-//   event    : (opcional) etiqueta de contexto, ex: 'Plague Star'
-//   update   : (opcional) versão do jogo, ex: '39.0'
-//   tags     : (opcional) ['solo', 'squad', 'baixo MR', ...]
-//   notes    : (opcional) texto mais longo, aparece só na tela de detalhe
-//   build    : {
+//   id         : identificador único (kebab-case)
+//   category   : 'warframe' | 'primary' | 'secondary' | 'melee' | 'amp' | 'archwing' | 'companion'
+//   subject    : nome exato do frame/arma (usado no thumbnail e no subtítulo)
+//   title      : título da build (aparece na lista)
+//   purpose    : (opcional) pra que serve, em uma linha
+//   event      : (opcional) etiqueta de contexto, ex: 'Plague Star'
+//   update     : (opcional) versão do jogo, ex: '39.0'
+//   difficulty : (opcional) 'green' | 'yellow' | 'orange' | 'red' (dificuldade de jogar)
+//   tags       : (opcional) ['solo', 'squad', 'baixo MR', ...]
+//   notes      : (opcional) texto mais longo, aparece só na tela de detalhe
+//   source     : (opcional) URL da build original (aparece um botão na tela de detalhe)
+//   credit     : (opcional) { name, org, author, url } — crédito de quem fez
+//   build      : {
 //     aura    : mod de aura            (warframe)
 //     stance  : stance                 (melee)
 //     exilus  : mod de exilus
@@ -21,17 +23,21 @@
 //     forma   : número de formas
 //     obs     : observação curta
 //   }
+// Sem `build` (ou sem mods), a tela de detalhe mostra só os dados + link da fonte.
+
+import { CASCADE_BUILDS } from './builds.cascade';
 
 export const BUILD_CATEGORIES = [
     { id: 'warframe', label: 'Warframes' },
     { id: 'primary', label: 'Primárias' },
     { id: 'secondary', label: 'Secundárias' },
     { id: 'melee', label: 'Melee' },
+    { id: 'amp', label: 'Amps' },
     { id: 'archwing', label: 'Archwing' },
     { id: 'companion', label: 'Companheiros' },
 ];
 
-export const BUILDS = [
+const MY_BUILDS = [
     {
         id: 'nova-plague-star',
         category: 'warframe',
@@ -106,3 +112,5 @@ export const BUILDS = [
         },
     },
 ];
+
+export const BUILDS = [...MY_BUILDS, ...CASCADE_BUILDS];

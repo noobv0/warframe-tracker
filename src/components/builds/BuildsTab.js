@@ -1,12 +1,33 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Layers, StickyNote } from 'lucide-react';
+import { ArrowLeft, Layers, StickyNote, ExternalLink, FileText } from 'lucide-react';
 import { BUILD_CATEGORIES, BUILDS } from '../../data/builds';
 import BuildRow from './BuildRow';
 import BuildView from './BuildView';
 import SubjectThumb from './SubjectThumb';
+import { DifficultyDot } from './difficulty';
+
+function Credit({ credit }) {
+    if (!credit) return null;
+    const name = credit.org || credit.name;
+    return (
+        <p className="text-[11px] text-carbon/45 dark:text-silver/60">
+            Build de{' '}
+            {credit.url ? (
+                <a href={credit.url} target="_blank" rel="noreferrer noopener" className="underline hover:text-mahogany dark:hover:text-strawberry">
+                    {name}
+                </a>
+            ) : (
+                name
+            )}
+            {credit.author && ` · ${credit.author}`}
+        </p>
+    );
+}
 
 function BuildDetail({ build, onBack }) {
     const b = build.build || {};
+    const hasGrid = Boolean(b.aura || b.stance || b.exilus || b.mods?.length);
+
     return (
         <>
             <button
@@ -19,7 +40,8 @@ function BuildDetail({ build, onBack }) {
             <div className="flex items-start gap-4">
                 <SubjectThumb subject={build.subject} size={72} />
                 <div className="min-w-0">
-                    <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-mahogany to-strawberry leading-tight">
+                    <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-mahogany to-strawberry leading-tight flex items-center gap-2">
+                        <DifficultyDot level={build.difficulty} className="w-3 h-3" />
                         {build.title}
                     </h2>
                     <p className="text-sm text-carbon/60 dark:text-silver/70 mt-0.5">
@@ -38,10 +60,29 @@ function BuildDetail({ build, onBack }) {
                             </span>
                         ))}
                     </div>
+                    <div className="mt-1.5"><Credit credit={build.credit} /></div>
                 </div>
             </div>
 
-            <BuildView build={b} />
+            {build.source && (
+                <a
+                    href={build.source}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="mt-4 inline-flex items-center gap-2 text-sm font-semibold px-3 py-2 rounded-xl bg-mahogany/10 text-mahogany dark:bg-strawberry/15 dark:text-strawberry hover:bg-mahogany/20 dark:hover:bg-strawberry/25 transition-colors"
+                >
+                    <ExternalLink className="w-4 h-4" /> Abrir build original
+                </a>
+            )}
+
+            {hasGrid ? (
+                <BuildView build={b} />
+            ) : (
+                <div className="mt-4 flex items-start gap-2.5 rounded-xl border border-dashed border-dustgrey dark:border-white/15 p-4 text-sm text-carbon/55 dark:text-silver/70">
+                    <FileText className="w-4 h-4 shrink-0 mt-0.5" />
+                    <span>Grade de mods ainda não transcrita — abra a build original no botão acima.</span>
+                </div>
+            )}
 
             {(b.forma != null || b.obs || build.notes) && (
                 <div className="mt-3 space-y-1.5 text-sm text-carbon/60 dark:text-silver/70">

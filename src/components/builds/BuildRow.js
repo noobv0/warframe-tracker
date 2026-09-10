@@ -1,10 +1,14 @@
 import React from 'react';
-import { ChevronRight, Layers } from 'lucide-react';
+import { ChevronRight, ExternalLink } from 'lucide-react';
 import SubjectThumb from './SubjectThumb';
+import { DifficultyDot } from './difficulty';
 
 // Linha da lista de builds — estilo Overframe.
 export default function BuildRow({ build, onOpen }) {
     const forma = build.build?.forma;
+    const hasGrid = Boolean(
+        build.build && (build.build.aura || build.build.stance || build.build.exilus || build.build.mods?.length)
+    );
     return (
         <button
             onClick={onOpen}
@@ -13,7 +17,8 @@ export default function BuildRow({ build, onOpen }) {
             <SubjectThumb subject={build.subject} />
 
             <div className="flex-1 min-w-0">
-                <p className="font-bold text-carbon dark:text-smoke leading-snug line-clamp-2">
+                <p className="font-bold text-carbon dark:text-smoke leading-snug line-clamp-2 flex items-center gap-1.5">
+                    <DifficultyDot level={build.difficulty} />
                     {build.title}
                 </p>
                 <p className="text-xs text-carbon/55 dark:text-silver/70 mt-0.5">
@@ -26,9 +31,9 @@ export default function BuildRow({ build, onOpen }) {
                             {build.event}
                         </span>
                     )}
-                    {build.update && (
-                        <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-green-500/15 text-green-600 dark:text-green-400">
-                            UPDATE {build.update}
+                    {build.credit && (
+                        <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-dustgrey/50 text-carbon/55 dark:bg-white/5 dark:text-silver/70">
+                            {build.credit.org || build.credit.name}
                         </span>
                     )}
                     {build.tags?.map(tag => (
@@ -40,16 +45,13 @@ export default function BuildRow({ build, onOpen }) {
             </div>
 
             <div className="shrink-0 flex items-center gap-2 pr-1 text-carbon/40 dark:text-silver/50">
-                {forma != null && (
+                {forma != null ? (
                     <span className="hidden sm:flex flex-col items-end leading-none">
                         <span className="text-lg font-bold text-carbon/70 dark:text-silver tabular-nums">{forma}</span>
                         <span className="text-[9px] font-semibold uppercase tracking-wider">Forma{forma === 1 ? '' : 's'}</span>
                     </span>
-                )}
-                {forma != null && (
-                    <span className="sm:hidden flex items-center gap-1 text-xs">
-                        <Layers className="w-3 h-3" />{forma}
-                    </span>
+                ) : (
+                    !hasGrid && build.source && <ExternalLink className="w-4 h-4" />
                 )}
                 <ChevronRight className="w-5 h-5" />
             </div>
