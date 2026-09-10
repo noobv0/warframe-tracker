@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import WarframeGrid from './components/WarframeGrid';
 import WeeklyChecklist from './components/WeeklyChecklist';
+import PlagueStarGuide from './components/plagueStar/PlagueStarGuide';
 import { useTheme } from './hooks/useTheme';
 
 const PANELS = {
     warframes: WarframeGrid,
     weekly: WeeklyChecklist,
+    plaguestar: PlagueStarGuide,
 };
 
 export default function App() {
