@@ -5,7 +5,7 @@ import BackupControls from './BackupControls';
 const TABS = [
     { id: 'warframes', label: 'Warframes' },
     { id: 'weekly', label: 'Semanais' },
-    { id: 'plaguestar', label: 'Plague Star' },
+    { id: 'builds', label: 'Builds' },
 ];
 
 export default function Header({ activeTab, onTabChange, theme, onToggleTheme }) {
