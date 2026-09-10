@@ -27,7 +27,7 @@ export default function SubjectThumb({ subject, size = 56 }) {
             loading="lazy"
             onError={() => setFailed(true)}
             className="shrink-0 rounded-xl object-cover bg-black/30"
-            style={px}
+            style={{ ...px, objectPosition: 'center 12%' }}
         />
     );
 }
