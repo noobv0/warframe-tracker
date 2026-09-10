@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Bug, Info, Wrench } from 'lucide-react';
+import { Bug, Wrench } from 'lucide-react';
 import { PLAGUE_STAR } from '../../data/plagueStar';
 import BuildView from './BuildView';
 
@@ -28,9 +28,6 @@ function PickCard({ pick }) {
             {pick.role && (
                 <p className="text-xs font-semibold text-mahogany dark:text-strawberry mb-1.5">{pick.role}</p>
             )}
-            {pick.why && (
-                <p className="text-sm text-carbon/70 dark:text-silver/80 leading-relaxed">{pick.why}</p>
-            )}
             {pick.tags?.length > 0 && (
                 <div className="mt-2.5 flex flex-wrap gap-1.5">
                     {pick.tags.map(tag => (
@@ -53,7 +50,7 @@ function PickCard({ pick }) {
 }
 
 export default function PlagueStarGuide() {
-    const { eventName, updatedAt, intro, tips, categories, picks } = PLAGUE_STAR;
+    const { eventName, updatedAt, intro, categories, picks } = PLAGUE_STAR;
     const [active, setActive] = useState(categories[0].id);
     const list = [...(picks[active] || [])].sort(
         (a, b) => (LABEL_ORDER[a.label] ?? 9) - (LABEL_ORDER[b.label] ?? 9)
@@ -76,15 +73,6 @@ export default function PlagueStarGuide() {
                 <LabelBadge label="core" />
                 <LabelBadge label="suporte" />
             </div>
-
-            {tips?.length > 0 && (
-                <div className="mt-5 flex gap-2.5 bg-mahogany/5 dark:bg-strawberry/10 border border-mahogany/20 dark:border-strawberry/20 rounded-2xl p-4">
-                    <Info className="w-4 h-4 shrink-0 mt-0.5 text-mahogany dark:text-strawberry" />
-                    <ul className="text-sm text-carbon/70 dark:text-silver/80 space-y-1.5 leading-relaxed">
-                        {tips.map((tip, i) => <li key={i}>{tip}</li>)}
-                    </ul>
-                </div>
-            )}
 
             {/* sub-abas por categoria */}
             <div className="mt-6 flex gap-5 border-b border-dustgrey/60 dark:border-white/10">

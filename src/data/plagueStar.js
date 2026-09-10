@@ -6,8 +6,7 @@
 // Cada pick:
 //   name  : nome do frame/arma
 //   label : 'core' | 'suporte'   ('core' = carrega a run; 'suporte' = complementa)
-//   role  : frase curta do papel (ex: "Limpeza de área", "Priming de status")
-//   why   : por que recomenda (1-3 frases)
+//   role  : (opcional) frase curta do papel (ex: "Limpeza de área")
 //   tags  : (opcional) etiquetas livres — ['solo', 'squad', 'baixo MR', ...]
 //   build : (opcional) {
 //             aura    : nome do mod de aura       (só warframe)
@@ -19,19 +18,13 @@
 //             obs     : observação curta          (opcional)
 //           }
 //
-// role / why / tags abaixo são um primeiro rascunho meu — ajusta pro teu texto.
 // As builds foram transcritas dos teus prints.
 
 export const PLAGUE_STAR = {
     eventName: 'Operação: Plague Star',
     updatedAt: '2026-09-09',
     intro:
-        'Minhas recomendações pra farmar o Plague Star com eficiência — do jeito que eu rodo. ' +
-        'Foco em derrubar o Hemocyte rápido e limpar o trash infestado no caminho.',
-    tips: [
-        'Exemplo: leve o Eidolon Phylaxis (Operativo em Cetus) pra +100% de standing por run.',
-        'Exemplo: monte vários Bilhetes de Serviço no Foundry antes — cada um aumenta a recompensa.',
-    ],
+        'Minhas recomendações pra farmar o Plague Star com eficiência — do jeito que eu rodo.',
 
     categories: [
         { id: 'warframe', label: 'Warframes' },
@@ -46,10 +39,6 @@ export const PLAGUE_STAR = {
                 name: 'Nova Prime',
                 label: 'core',
                 role: 'Lentidão global + amplificação de dano',
-                why:
-                    'Molecular Prime deixa todo o boil lento e faz os infestados explodirem em cadeia, ' +
-                    'além de aumentar todo o dano que o Hemocyte recebe. Setup tanky com Molecular Fission ' +
-                    'e Brief Respite pra segurar a fase de canalização.',
                 tags: ['solo', 'squad'],
                 build: {
                     aura: 'Brief Respite',
@@ -68,9 +57,6 @@ export const PLAGUE_STAR = {
                 name: 'Afentis',
                 label: 'suporte',
                 role: 'Dano de status à distância',
-                why:
-                    'Cadência alta com Hunter Munitions e status corrosivo/gelo raspa o Hemocyte de longe ' +
-                    'enquanto a Nova segura o campo. Vigilante Supplies mantém a munição.',
                 tags: ['squad'],
                 build: {
                     exilus: 'Vigilante Supplies',
@@ -88,9 +74,6 @@ export const PLAGUE_STAR = {
                 name: 'Pyrana Prime',
                 label: 'core',
                 role: 'DPS single-target no Hemocyte',
-                why:
-                    'Com Precisão Letal e o orbe do modo Prime, despeja dano altíssimo na fase de canalização ' +
-                    'e ainda limpa trash. Corrosivo + Calor pra status.',
                 tags: ['solo', 'squad'],
                 build: {
                     exilus: 'Pistol Ammo Mutation',
@@ -108,9 +91,6 @@ export const PLAGUE_STAR = {
                 name: 'Sarpa',
                 label: 'suporte',
                 role: 'Remoção de armadura + Condition Overload',
-                why:
-                    'Shattering Impact tira armadura do Hemocyte a cada acerto e Condition Overload multiplica ' +
-                    'pelo status que a Pyrana aplicou. High Noon (gunblade) pra alcance.',
                 tags: ['squad'],
                 build: {
                     stance: 'High Noon',
