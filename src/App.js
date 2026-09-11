@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from './components/Header';
 import WarframeGrid from './components/WarframeGrid';
 import WeeklyChecklist from './components/WeeklyChecklist';
 import BuildsTab from './components/builds/BuildsTab';
 import { useTheme } from './hooks/useTheme';
+import { useRoute } from './hooks/useRoute';
 
 const PANELS = {
     warframes: WarframeGrid,
@@ -12,7 +13,8 @@ const PANELS = {
 };
 
 export default function App() {
-    const [activeTab, setActiveTab] = useState('warframes');
+    const [route, navigate] = useRoute();
+    const activeTab = route.tab;
     const [theme, toggleTheme] = useTheme();
     const ActivePanel = PANELS[activeTab];
 
@@ -24,7 +26,7 @@ export default function App() {
                     <div className="bg-white dark:bg-carbon/70 backdrop-blur-sm rounded-3xl shadow-xl shadow-black/5 dark:shadow-black/40 border border-dustgrey/60 dark:border-white/5 p-6 md:p-8">
                         <Header
                             activeTab={activeTab}
-                            onTabChange={setActiveTab}
+                            onTabChange={(tab) => navigate({ tab })}
                             theme={theme}
                             onToggleTheme={toggleTheme}
                         />

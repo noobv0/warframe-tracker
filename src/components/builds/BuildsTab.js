@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ArrowLeft, Layers, StickyNote } from 'lucide-react';
 import { BUILD_CATEGORIES, BUILDS } from '../../data/builds';
+import { useRoute } from '../../hooks/useRoute';
 import BuildRow from './BuildRow';
 import BuildView from './BuildView';
 import SubjectThumb from './SubjectThumb';
@@ -57,11 +58,18 @@ function BuildDetail({ build, onBack }) {
 }
 
 export default function BuildsTab() {
-    const [activeCat, setActiveCat] = useState(BUILD_CATEGORIES[0].id);
-    const [openId, setOpenId] = useState(null);
+    const [route, navigate] = useRoute();
+    const activeCat = route.category || BUILD_CATEGORIES[0].id;
 
-    const open = openId && BUILDS.find(x => x.id === openId);
-    if (open) return <BuildDetail build={open} onBack={() => setOpenId(null)} />;
+    const open = route.buildId && BUILDS.find(x => x.id === route.buildId);
+    if (open) {
+        return (
+            <BuildDetail
+                build={open}
+                onBack={() => navigate({ tab: 'builds', category: activeCat })}
+            />
+        );
+    }
 
     const list = BUILDS.filter(x => x.category === activeCat);
 
@@ -73,7 +81,7 @@ export default function BuildsTab() {
                     return (
                         <button
                             key={cat.id}
-                            onClick={() => setActiveCat(cat.id)}
+                            onClick={() => navigate({ tab: 'builds', category: cat.id })}
                             className={`relative pb-2.5 text-sm font-semibold tracking-wide whitespace-nowrap transition-colors ${
                                 activeCat === cat.id
                                     ? 'text-mahogany dark:text-strawberry'
@@ -95,7 +103,11 @@ export default function BuildsTab() {
             ) : (
                 <div className="mt-4 space-y-2.5">
                     {list.map(build => (
-                        <BuildRow key={build.id} build={build} onOpen={() => setOpenId(build.id)} />
+                        <BuildRow
+                            key={build.id}
+                            build={build}
+                            onOpen={() => navigate({ tab: 'builds', category: activeCat, buildId: build.id })}
+                        />
                     ))}
                 </div>
             )}
