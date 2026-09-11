@@ -17,7 +17,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "build:mods": "node scripts/build-mods.mjs",
-    "build:cascade": "node scripts/build-cascade-index.mjs",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
